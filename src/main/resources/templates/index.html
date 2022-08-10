@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Spring OAuth Client - 1</title>
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-success shadow-sm p-3 mb-5">
+            <a class="navbar-brand">Spring OAuth Client - 1</a>
+        </nav>
+
+        <div class="container">
+            <label>Welcome ! </label> <a th:href="@{/auth/logout}">Logout</a><br />
+
+            <div><b>GET TOKEN RESULT :  </b><br /> 
+                <pre id="authuser"></pre>
+            </div>  <br />
+            <div><b>CHECK TOKEN RESULT : </b><br /> 
+                <pre id="checktoken"></pre>
+            </div>
+
+        </div>
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/userauth",
+
+                success: function (data) {
+                    console.log(data);
+
+                    document.getElementById("authuser").innerHTML = JSON.stringify(data, undefined, 2);
+                },
+                error: function (xhr, status, error) {
+                    console.log("error" + error);
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/checktoken",
+
+                success: function (data) {
+                    console.log(data);
+                    document.getElementById("checktoken").innerHTML = JSON.stringify(data, undefined, 2);
+
+                },
+                error: function (xhr, status, error) {
+                    console.log("error" + error);
+                }
+            });
+        });
+
+
+
+
+    </script>
+</html>
